@@ -1,8 +1,8 @@
 /**
  * 
- * author Shishir Kinkar
- * version 1.0 - Brute force solution to Weighing the Stones kata
- *
+ * @author Shishir Kinkar
+ * @version 1.0 - Brute force solution to Weighing the Stones kata
+ *			2.0 - Loops to repalce brute force to find the correct combination
  */
 
 
@@ -28,7 +28,7 @@ public class StoneWeights{
 	
 /**	
  *	This method finds all the possible combinations and returns the result or null
- *	return int[] An array of integers if combination found
+ *	@return int[] An array of integers if combination found
  *			null otherwise
  */
 	int[] getCombinations(){
@@ -80,103 +80,32 @@ public class StoneWeights{
 			boolean weightsFound = true;
 			List<Integer> weights = new ArrayList<Integer>();
 
-			//All single stones
-			weights.add(wts[0]);
-			weights.add(wts[1]);
-			weights.add(wts[2]);
-			weights.add(wts[3]);
+			for (int m1 = -1; m1 <= 1 ; m1++) {
+				
+				for (int m2 = -1; m2 <= 1 ; m2++) {
 
-			//Stone 1 and 2 
-			weights.add(wts[0] + wts[1]);
-			weights.add(wts[0] - wts[1]);
-			weights.add(wts[1] - wts[0]);
+					for (int m3 = -1; m3 <= 1 ; m3++) {
 
-			//Stone 1 and 3 
-			weights.add(wts[0] + wts[2]);
-			weights.add(wts[0] - wts[2]);
-			weights.add(wts[2] - wts[0]);
+						for (int m4 = -1; m4 <= 1 ; m4++){
 
-			//Stone 1 and 4 
-			weights.add(wts[0] + wts[3]);
-			weights.add(wts[0] - wts[3]);
-			weights.add(wts[3] - wts[0]);
+							weights.add(m1 * wts[0] + m2 * wts[1] + m3 * wts[2] + m4 * wts[3]);
 
-			//Stone 2 and 3 
-			weights.add(wts[1] + wts[2]);
-			weights.add(wts[1] - wts[2]);
-			weights.add(wts[2] - wts[1]); 
+						} 
+					}
 
-			//Stone 2 and 4 
-			weights.add(wts[1] + wts[3]);
-			weights.add(wts[1] - wts[3]);
-			weights.add(wts[3] - wts[1]); 
+				}
 
-			//Stone 3 and 4 
-			weights.add(wts[2] + wts[3]);
-			weights.add(wts[2] - wts[3]);
-			weights.add(wts[3] - wts[2]); 
-
-			//Stones 1, 2 and 3
-			weights.add(wts[0] + wts[1] + wts[2]);
-			weights.add(wts[0] + wts[1] - wts[2]);
-			weights.add(wts[0] - wts[1] + wts[2]);
-			weights.add(wts[0] - wts[1] - wts[2]);
-			weights.add(wts[1] + wts[2] - wts[0]);
-			weights.add(wts[1] - wts[2] - wts[0]);
-			weights.add(wts[2] - wts[0] - wts[1]);
-
-			//Stones 1, 2 and 4
-			weights.add(wts[0] + wts[1] + wts[3]);
-			weights.add(wts[0] + wts[1] - wts[3]);
-			weights.add(wts[0] - wts[1] + wts[3]);
-			weights.add(wts[0] - wts[1] - wts[3]);
-			weights.add(wts[1] + wts[3] - wts[0]);
-			weights.add(wts[1] - wts[3] - wts[0]);
-			weights.add(wts[3] - wts[0] - wts[1]);
-
-			//Stones 1, 2 and 3
-			weights.add(wts[0] + wts[2] + wts[3]);
-			weights.add(wts[0] + wts[2] - wts[3]);
-			weights.add(wts[0] - wts[2] + wts[3]);
-			weights.add(wts[0] - wts[2] - wts[3]);
-			weights.add(wts[2] + wts[3] - wts[0]);
-			weights.add(wts[2] - wts[3] - wts[0]);
-			weights.add(wts[3] - wts[0] - wts[2]);
-
-			//Stones 2, 3 and 4
-			weights.add(wts[1] + wts[2] + wts[3]);
-			weights.add(wts[1] + wts[2] - wts[3]);
-			weights.add(wts[1] - wts[2] + wts[3]);
-			weights.add(wts[1] - wts[2] - wts[3]);
-			weights.add(wts[2] + wts[3] - wts[1]);
-			weights.add(wts[2] - wts[3] - wts[1]);
-			weights.add(wts[3] - wts[1] - wts[2]);
-
-			//All stones
-			weights.add(wts[0] + wts[1] + wts[2] + wts[3]);
-			weights.add(wts[0] + wts[1] + wts[2] - wts[3]);
-			weights.add(wts[0] + wts[1] - wts[2] + wts[3]);
-			weights.add(wts[0] - wts[1] + wts[2] + wts[3]);
-			weights.add(wts[0] + wts[1] - wts[2] - wts[3]);
-			weights.add(wts[0] - wts[1] + wts[2] - wts[3]);
-			weights.add(wts[0] - wts[1] - wts[2] + wts[3]);
-			weights.add(wts[0] - wts[1] - wts[2] - wts[3]);
-			weights.add(wts[1] + wts[2] + wts[3] - wts[0]);
-			weights.add(wts[1] + wts[2] - wts[0] - wts[3]);
-			weights.add(wts[1] + wts[3] - wts[0] - wts[2]);
-			weights.add(wts[2] + wts[3] - wts[0] - wts[1]);
-			weights.add(wts[1] - wts[2] - wts[3] - wts[0]);
-			weights.add(wts[2] - wts[0] - wts[1] - wts[3]);
-			weights.add(wts[3] - wts[0] - wts[1] - wts[2]);
+			}
 	
 
+// Check if all the necessary weights are found
 			for(int checkWeight = 1; checkWeight < 40; checkWeight++){
 				if(!weights.contains(checkWeight))
 					weightsFound = false;
 			}	
 
 			if (weightsFound == true)
-				return true;			
+				return true;		
 			else
 				return false;
 		}
