@@ -1,3 +1,11 @@
+/*
+ * Implmentation of Various Sorts - A single interface to take several numbers and sort them 
+ * as per the selected sorting algorithm.
+ * @author  - Shishir Kinkar
+ * @version - 1.0 Initial program + Insertion sort
+ */
+
+
 import java.io.Console;
 import java.util.Arrays;
 import java.io.IOException;
@@ -6,27 +14,24 @@ public class Sorts{
 	
 	public static void main(String[] args) throws IOException {
 
-
 		Sorts currentSet = new Sorts();
-
 		Console c = System.console();
+
 		if (c == null){
             System.err.println("No console.");
             System.exit(1);
         }
 
+// Replace console read by bufferedReader?        
         String nums = c.readLine("Enter the size of the number set: ");
-        int arrayLength = Integer.parseInt(nums);
+        
+        int arrayLength = Integer.parseInt(nums);       
         int[] numbers = new int[arrayLength];
         int[] sortedNumbers = new int[arrayLength];
         
         for (int i = 1; i <= arrayLength; i++) {
-
         	numbers[i - 1] = Integer.parseInt(c.readLine("Enter number " + i + ": "));
-
-        }
-
-        
+        }        
 
         System.out.println("Sorting options are:");
         System.out.println("1. Insertion sort");
@@ -41,15 +46,37 @@ public class Sorts{
 
         System.out.println("Sorted numbers are: "); 
         for (int k = 0; k < arrayLength; k++){
-        	System.out.println(sortedNumbers[k]);
+        	System.out.print(sortedNumbers[k] + " ");
         }
-
+		System.out.println();
 	}
 
-
+/*
+ * Implmentation of Insertion Sort
+ * @param  - interger array
+ * @return - integer array
+ */
 
 	int[] insertionSort(int[] numbersToSort){
 
+		for (int i = 1; i < numbersToSort.length; i++){
+
+			int key = numbersToSort[i];
+			int j   = i - 1;
+
+			while (j >= 0){
+
+				if (numbersToSort[j] > key){
+					numbersToSort[j + 1] = numbersToSort[j];
+				}
+				else{
+					break;
+				}
+				j--;
+			}
+			numbersToSort[j + 1] = key;
+
+		}
 		
 		return numbersToSort;
 	}
