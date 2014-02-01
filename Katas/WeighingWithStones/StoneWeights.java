@@ -91,10 +91,11 @@ public class StoneWeights{
 							weights.add(m1 * wts[0] + m2 * wts[1] + m3 * wts[2] + m4 * wts[3]);
 
 						} 
+
 					}
 
 				}
-
+				
 			}
 	
 
