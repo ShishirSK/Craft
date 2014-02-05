@@ -6,12 +6,10 @@ import java.io.InputStreamReader;
  * A program to perform various string manipulation operations
  * @author 	- Shishir Kinkar 
  * @version - 0.1 	- Initial commit
+ *			  0.2 	- String Reversal
  */
 public class StringOperations{
 	
-	private String reversedString = null;
-	private String[] permutedStrings = null;
-
 /*
  * Gives the menu for the program 
  * 
@@ -34,12 +32,11 @@ public class StringOperations{
  */
 	void menu() throws IOException {
 
-		String string = null;
 		int inputOption = 0;
 
 		System.out.println("Enter a string:");
 		BufferedReader str = new BufferedReader(new InputStreamReader(System.in));
-		string = str.readLine();
+		String string = str.readLine();
 
 		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. All permutations ");
 		BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
@@ -52,41 +49,47 @@ public class StringOperations{
 
         // Perform operation based on user input
 		switch (inputOption){
-			case 1: reversedString = strReversal(string);
+			case 1: strReversal(string);
 				break;
-			case 2: permutedStrings = strPermutations(string);
+			case 2: strPermutations(string);
 				break;
 			default: System.out.println("Choose another operation.");
 		}
-
 	}
 
 
 /*
  * Takes a string, reverses it and returns
  * 
- * @param 	- none
- * @return 	- void
+ * @param 	- inputstream 	- A string given by the user
+ * @return 	- void 			
  */
-	String strReversal(String inputString){
-		String returnString = null;
+	void strReversal(String inputString){
 
+		StringBuffer reverseString = new StringBuffer();
+		String[] strArray = new String[inputString.length()];
+		
+		strArray = inputString.split("");
 
-		return returnString;
+		for (int strIndex = strArray.length - 1; strIndex >= 0; strIndex--)
+		{
+			reverseString.append(strArray[strIndex]);
+		}
+
+		System.out.println("The reversed string is: " + reverseString.toString());
 	}
 
 
 /*
  * Returns all the permutations of a string
  * 
- * @param 	- none
+ * @param 	- inputstream 	- A string given by the user
  * @return 	- void
  */	
 
-	String[] strPermutations(String inputString){
-		String[] strPermutations = null;
+	void strPermutations(String inputString){
 
 
-		return strPermutations;
+
 	}
 }
