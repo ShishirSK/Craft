@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * A program to perform various string manipulation operations
@@ -38,7 +41,7 @@ public class StringOperations{
 		BufferedReader str = new BufferedReader(new InputStreamReader(System.in));
 		String string = str.readLine();
 
-		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. All permutations ");
+		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. All uniques ");
 		BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
 
 		try{
@@ -51,7 +54,9 @@ public class StringOperations{
 		switch (inputOption){
 			case 1: strReversal(string);
 				break;
-			case 2: strPermutations(string);
+			case 2: checkForAllUniques(string);
+				break;
+			case 3: strPermutations(string);
 				break;
 			default: System.out.println("Choose another operation.");
 		}
@@ -81,15 +86,35 @@ public class StringOperations{
 
 
 /*
- * Returns all the permutations of a string
+ * Checks if an entered string is composed of all unique characters
+ * 
+ * @param 	- inputstream 	- A string given by the user
+ * @return 	- void
+ */	
+	void checkForAllUniques(String inputString){
+
+		int strLength = inputString.length();
+
+		for (int i = 1; i < strLength; i++) {
+
+			char currentChar = inputString.charAt(i);
+			if (inputString.substring(i + 1).contains(String.valueOf(currentChar))) {
+				System.out.println("String does not contain all unique characters.");
+				return;
+			}
+		}
+		System.out.println("String contains all unique characters.");
+	}
+
+
+/*
+ * Returns all the permutations of a string - To be implemented
  * 
  * @param 	- inputstream 	- A string given by the user
  * @return 	- void
  */	
 
 	void strPermutations(String inputString){
-
-
 
 	}
 }
