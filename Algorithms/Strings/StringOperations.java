@@ -117,6 +117,8 @@ public class StringOperations{
  * @return 	- void
  */	
 
+ // NOTE: Consider the cases of case sensitivity and blank spaces in the strings. 
+
 	void checkForOnePermOfOther(String inputString) throws IOException {
 
 		System.out.println("Enter the second string:");
