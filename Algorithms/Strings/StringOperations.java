@@ -18,7 +18,7 @@ public class StringOperations{
  * 
  * @throws	- IOException
  */
-	public static void main(String[] args) throws IOException {
+	public static void main(String args[]) throws IOException {
 
 		StringOperations allOps = new StringOperations();
 		allOps.menu();
@@ -41,7 +41,8 @@ public class StringOperations{
 		BufferedReader str = new BufferedReader(new InputStreamReader(System.in));
 		String string = str.readLine();
 
-		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. All uniques ");
+		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. Check for all uniques"); 
+		System.out.println(" 3. Check if one is permutation of other");
 		BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
 
 		try{
@@ -56,7 +57,9 @@ public class StringOperations{
 				break;
 			case 2: checkForAllUniques(string);
 				break;
-			case 3: strPermutations(string);
+			case 3: checkForOnePermOfOther(string);
+				break;	
+			case 4: strPermutations(string);
 				break;
 			default: System.out.println("Choose another operation.");
 		}
@@ -106,6 +109,37 @@ public class StringOperations{
 		System.out.println("String contains all unique characters.");
 	}
 
+
+/*
+ * Checks if an entered string is permutation of other string
+ * 
+ * @param 	- inputstream 	- A string given by the user
+ * @return 	- void
+ */	
+
+	void checkForOnePermOfOther(String inputString) throws IOException {
+
+		System.out.println("Enter the second string:");
+		BufferedReader str2 = new BufferedReader(new InputStreamReader(System.in));
+		String inputString2 = str2.readLine();
+
+		if (inputString == inputString2)
+			System.out.println("They are same strings!");
+		else if (inputString.length() != inputString2.length())
+			System.out.println("The strings are not valid permutations.");
+		else {
+
+			for (int i = 0; i < inputString.length(); i++) {
+
+				char currentChar = inputString.charAt(i);
+				if (!inputString2.contains(String.valueOf(currentChar))) {
+					System.out.println("Second string is not a permutation of the first.");
+					return;
+				}
+			}
+			System.out.println("Second string is a permutation of the first.");
+		}
+	}
 
 /*
  * Returns all the permutations of a string - To be implemented
