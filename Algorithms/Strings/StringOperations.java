@@ -42,7 +42,7 @@ public class StringOperations{
 		String string = str.readLine();
 
 		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. Check for all uniques"); 
-		System.out.println(" 3. Check if one is permutation of other");
+		System.out.println(" 3. Check if one is permutation of other \n 4. Insert %20 in place of spaces between words");
 		BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
 
 		try{
@@ -58,8 +58,10 @@ public class StringOperations{
 			case 2: checkForAllUniques(string);
 				break;
 			case 3: checkForOnePermOfOther(string);
-				break;	
-			case 4: strPermutations(string);
+				break;
+			case 4: repalceBlankSpaces(string);
+				break;
+			case 5: strPermutations(string);
 				break;
 			default: System.out.println("Choose another operation.");
 		}
@@ -142,6 +144,32 @@ public class StringOperations{
 			System.out.println("Second string is a permutation of the first.");
 		}
 	}
+
+
+/*
+ * Replaces all blanks between words by %20. Blanks at the end should not be replaced 
+ * 
+ * @param 	- inputstream 	- A string given by the user
+ * @return 	- void
+ */	
+
+	void repalceBlankSpaces(String inputString){
+
+		String[] strArray = inputString.trim().split(" ");
+		String filler = "%20";
+		StringBuilder modifiedString = new StringBuilder();
+		
+		for (int i = 0; i < strArray.length; i++) {
+
+			modifiedString.append(strArray[i]);
+
+			if ( i != strArray.length -1 ){
+				modifiedString.append(filler);
+			}
+		}
+	    System.out.print("Modified String is: " + modifiedString);
+	}
+
 
 /*
  * Returns all the permutations of a string - To be implemented
