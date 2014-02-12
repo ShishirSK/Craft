@@ -40,12 +40,14 @@ public class StringOperations{
 
 		int inputOption = 0;
 
-		System.out.println("Enter a string:");
+		System.out.print("Enter a string: ");
 		BufferedReader str = new BufferedReader(new InputStreamReader(System.in));
 		String string = str.readLine();
 
-		System.out.println("Choose operation to perform: \n 1. String reversal \n 2. Check for all uniques"); 
+		System.out.println("String operations: \n 1. String reversal \n 2. Check for all uniques"); 
 		System.out.println(" 3. Check if one is permutation of other \n 4. Insert %20 in place of spaces between words");
+		System.out.println(" 5. Compress String by Replacing Repeat Characters by count");
+		System.out.print("Choose operation to perform: ");
 		BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
 
 		try{
@@ -186,6 +188,56 @@ public class StringOperations{
 
 	void strRepeatCount(String inputString){
 
+		int strSize = countCompression(inputString);
+		if (strSize >= inputString.length()) {
+			System.out.println("The string is uncompressed: " + inputString);
+			return;
+		}
+
+		StringBuilder newString = new StringBuilder();
+		char last = inputString.charAt(0);
+		int count = 1;
+
+		for (int i = 1; i < inputString.length(); i++) {
+			if (inputString.charAt(i) == last) {
+				count++;
+			} else {
+				newString.append(last);
+				newString.append(count);
+				last = inputString.charAt(i);
+				count = 1;
+			}
+		}
+
+		newString.append(last);
+		newString.append(count);
+		System.out.println("The output string is: " + newString.toString());
+	}
+
+/*
+ * Returns size of string pasees by the strRepeatCount string compression method
+ * 
+ * @param 	- str 	 - String to check the size of
+ * @return 	- int 	 - The size of the string
+ */	
+
+	int countCompression(String str) {
+
+		if (str == null || str.isEmpty()) return 0;
+		char last = str.charAt(0);
+		int size = 0;
+		int count = 1;
+		for (int i = 1; i < str.length(); i++) {
+			if (str.charAt(i) == last) {
+				count++;
+			} else {
+				last = str.charAt(i);
+				size += 1 + String.valueOf(count).length();
+				count = 1;
+			}
+		}
+		size += 1 + String.valueOf(count).length();
+		return size;
 	}
 
 
