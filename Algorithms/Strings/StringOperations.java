@@ -10,6 +10,9 @@ import java.util.Arrays;
  * @author 	- Shishir Kinkar 
  * @version - 0.1 	- Initial commit
  *			  0.2 	- String Reversal
+ * 			  0.3 	- Check for one string being permutation of other
+ *			  0.4 	- Replace blank spaces by %20
+ *			  0.5  	- Replace repeat characters by repeat count
  */
 public class StringOperations{
 	
@@ -61,7 +64,9 @@ public class StringOperations{
 				break;
 			case 4: repalceBlankSpaces(string);
 				break;
-			case 5: strPermutations(string);
+			case 5: strRepeatCount(string);
+				break;
+			case 6: strPermutations(string);
 				break;
 			default: System.out.println("Choose another operation.");
 		}
@@ -168,6 +173,19 @@ public class StringOperations{
 			}
 		}
 	    System.out.print("Modified String is: " + modifiedString);
+	}
+
+
+/*
+ * Replace all consecutive characters in a string by count of repetition.
+ * If the length of string is not reduced, print out the original string. 
+ *
+ * @param 	- inputstream 	- A string given by the user
+ * @return 	- void
+ */	
+
+	void strRepeatCount(String inputString){
+
 	}
 
 
