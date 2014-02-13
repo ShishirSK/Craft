@@ -7,3 +7,10 @@ nbproject/private/
 *.DS_Store
 *.swp
 *.out
+.project
+.classpath
+.settings/*
+build/*
+.DS_Store
+/build
+.metadata
