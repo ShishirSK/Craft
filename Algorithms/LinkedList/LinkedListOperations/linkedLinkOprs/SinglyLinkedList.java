@@ -11,6 +11,8 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
 	private Node<AnyType> head = null; 
 	private Node<AnyType> first = null;
+	private Node<AnyType> last = null;
+	
 	public SinglyLinkedList(){
 		head = null;
 	}
@@ -33,6 +35,28 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 		}
 	}
 
+	/*
+	 * Method to add node at the end of the list
+	 * 
+	 * @return 	- void 			
+	 * @param	- item	- Value of the node
+	 */
+	public void addLast(AnyType item){
+		if (head == null){
+			head = new Node<AnyType>(item);
+			head.next = null;
+		}
+		else {
+			last = new Node<AnyType>(item);
+			Node<AnyType> n = head;
+			while (n.next != null){
+				n = n.next;
+			}
+			n.next = last;
+			last.next = null;
+		}
+	}
+	
 	/*
 	 * Method to get the the beginning node of the list
 	 * 
@@ -67,7 +91,21 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 		}
 	}
 
-
+	/*
+	 * Method to show the current linked list 
+	 * 
+	 * @return 	- void 			
+	 */	
+	public void showCurrentList(){
+	
+		Node<AnyType> n = head;
+		while (n != null) {
+			System.out.print(n.data + " ");
+			n = n.next;
+		}
+		System.out.println();
+	}
+	
 	@Override
 	public Iterator<AnyType> iterator() {
 		// TODO Auto-generated method stub

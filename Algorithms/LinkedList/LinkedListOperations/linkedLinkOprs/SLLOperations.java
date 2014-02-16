@@ -24,7 +24,7 @@ public class SLLOperations {
 					
 			// Create a default list
 			for	(int i = 1; i < 6; i++)	{
-				defaultList.addFirst(i);
+				defaultList.addLast(i);
 			}
 			
 			SLLOperations starter = new SLLOperations();
@@ -44,13 +44,18 @@ public class SLLOperations {
 
 			int inputOption = 0;
 			// Create menu
-			System.out.println("Linked List operations: \n 1. Add nodes to the list"); 
-			System.out.println(" 2. Remove Duplicates (with buffer)");
-			System.out.println(" 3. Remove Duplicates (without buffer)"); 
-			System.out.println(" 4. Find Kth to last element \n 5. Delete a node in the middle of a SLL ");
+			System.out.println("Linked List operations: \n 1. Add node at the beginning of the list");
+			System.out.println(" 2. Add node at the end of the list");
+			System.out.println(" 3. Remove Duplicates (with buffer)");
+			System.out.println(" 4. Remove Duplicates (without buffer)"); 
+			System.out.println(" 5. Find Kth to last element \n 5. Delete a node in the middle of a SLL ");
+			System.out.print("Current list is:");
+			
+			defaultList.showCurrentList();
+			
 			System.out.print("Choose operation to perform: ");
+			
 			BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
-
 			try{
 	            inputOption = Integer.parseInt(opr.readLine());
 	        }catch(NumberFormatException nfe){
@@ -59,19 +64,20 @@ public class SLLOperations {
 
 	        // Perform operation based on user input
 			switch (inputOption){
-				case 1: addNode();
+				case 1: addFirstNode();
 					break;
-				case 2: removeDuplicateWB();
+				case 2: addLastNode();
 					break;
-				case 3: removeDuplicateWOB();
+				case 3: removeDuplicateWB();
 					break;
-				case 4: findKthToLast();
+				case 4: removeDuplicateWOB();
 					break;
-				case 5: deleteMiddleNode();
+				case 5: findKthToLast();
+					break;
+				case 6: deleteMiddleNode();
 					break;
 				default: System.out.println("Choose another operation.");
 			}
-
 		}
 
 	/*
@@ -79,7 +85,7 @@ public class SLLOperations {
 	 * 
 	 * @return 	- void 			
 	 */
-		void addNode() throws IOException {
+		void addFirstNode() throws IOException {
 
 			int nodeValue = 0;
 			System.out.print("Add a value of node to be added: ");
@@ -98,7 +104,30 @@ public class SLLOperations {
 			menu();
 		}
 
+	/*
+	 * Method to add node at the end of the list
+	 * 
+	 * @return 	- void 			
+	 */
+		void addLastNode() throws IOException {
 
+			int nodeValue = 0;
+			System.out.print("Add a value of node to be added: ");
+
+			BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
+
+			try{
+	            nodeValue = Integer.parseInt(opr.readLine());
+	        }catch(NumberFormatException nfe){
+	            System.err.println("Invalid Format!");
+	            return;
+	        }
+
+			defaultList.addLast(nodeValue);
+			// Go back to the menu
+			menu();
+		}
+			
 	/*
 	 * Program to remove duplicates from a linked list with buffer
 	 * 
@@ -106,18 +135,21 @@ public class SLLOperations {
 	 */
 		void removeDuplicateWB(){
 			
+			defaultList.showCurrentList();
 			Hashtable<Integer, Boolean> refTable = new Hashtable<Integer, Boolean>();
 			Node<Integer> currentNode = defaultList.getFirst();
-			
+			Node<Integer> previous = null;
 			while (currentNode != null){
 				if (refTable.containsKey(currentNode.data)){
-					currentNode.data = currentNode.next.data;
-					currentNode.next = currentNode.next.next;
+					System.out.println("Duplicate found: " + currentNode.data); // Show duplicate value
+					previous.next = currentNode.next;
 				} else {
 					refTable.put((Integer) currentNode.data, true);
-					currentNode = currentNode.next;
-				}		
+					previous = currentNode;
+				}	
+				currentNode = currentNode.next;
 			}
+			defaultList.showCurrentList();
 		}
 
 	/*
