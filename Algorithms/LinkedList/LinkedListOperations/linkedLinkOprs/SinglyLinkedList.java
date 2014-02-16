@@ -70,9 +70,9 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 	}
 
 	/*
-	 * Method to add node at the given position in the list
+	 * Method to get node at the given position in the list
 	 * 
-	 * @return 	- void 			
+	 * @return 	- Node		- Node at the specific position 			
 	 * @param	- position	- position of the node
 	 */	
 	public Node<AnyType> get(int position){
@@ -81,7 +81,7 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 			throw new IndexOutOfBoundsException();
 
 		Node<AnyType> currNode = head;
-		for (int pos = 0; pos > position; pos--){
+		for (int pos = 1; pos < position; pos++){
 			currNode = currNode.next;
 		}
 		if( currNode == null){

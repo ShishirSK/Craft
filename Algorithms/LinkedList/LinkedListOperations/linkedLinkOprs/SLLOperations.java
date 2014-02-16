@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
  * @version - 0.1 	- Initial commit
  *			  0.2 	- Create SinglyLinkedList class and Node class
  *					- Delete duplicates with buffer
+ *			  0.3	- Delete duplicates without buffer, Find Kth to last
+ *					  and delete a middle node 
  */
 
 public class SLLOperations {
@@ -48,7 +50,7 @@ public class SLLOperations {
 			System.out.println(" 2. Add node at the end of the list");
 			System.out.println(" 3. Remove Duplicates (with buffer)");
 			System.out.println(" 4. Remove Duplicates (without buffer)"); 
-			System.out.println(" 5. Find Kth to last element \n 5. Delete a node in the middle of a SLL ");
+			System.out.println(" 5. Find Kth to last element \n 6. Delete a node in the middle of a SLL ");
 			System.out.print("Current list is:");
 			
 			defaultList.showCurrentList();
@@ -74,7 +76,7 @@ public class SLLOperations {
 					break;
 				case 5: findKthToLast();
 					break;
-				case 6: deleteMiddleNode();
+				case 6: deleteAMiddleNode();
 					break;
 				default: System.out.println("Choose another operation.");
 			}
@@ -189,8 +191,36 @@ public class SLLOperations {
 	 * 
 	 * @return 	- void 			
 	 */
-		void findKthToLast(){
+		void findKthToLast() throws IOException{
 
+			int nodePosition = 0;
+			
+			// Get the position from the user
+			System.out.print("Add the position to find, from the last one: ");
+			BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
+
+			try{
+	            nodePosition = Integer.parseInt(opr.readLine());
+	        }catch(NumberFormatException nfe){
+	            System.err.println("Invalid Format!");
+	            return;
+	        }
+			
+			// One pointer stays behind the other one by K - 1 locations
+			Node<Integer> leadPosition = defaultList.getFirst();
+			Node<Integer> kthPosition = defaultList.getFirst();
+			
+			for (int i = 1; i < nodePosition; i++)
+				leadPosition = leadPosition.next;
+			
+			while(leadPosition.next != null){
+				leadPosition = leadPosition.next;
+				kthPosition  = kthPosition.next;
+			}
+			System.out.print("The current list is: ");
+			defaultList.showCurrentList();
+			System.out.println("Position " + nodePosition + " from last is: " + kthPosition.data);
+			
 		}
 
 	/*
@@ -198,8 +228,33 @@ public class SLLOperations {
 	 * 
 	 * @return 	- void 			
 	 */
-		void deleteMiddleNode(){
+		void deleteAMiddleNode() throws IOException{
 
+			int nodePosition = 0;
+			Node<Integer> nodeToDelete = null;
+			
+			// Get the position from the user
+			System.out.print("Add the node position to delete: ");
+			BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
+
+			try{
+	            nodePosition = Integer.parseInt(opr.readLine());
+	        }catch(NumberFormatException nfe){
+	            System.err.println("Invalid Format!");
+	            return;
+	        }
+			
+			System.out.print("The original list was: ");
+			defaultList.showCurrentList();
+			
+			// Move next node to node to be deleted and delete the next one
+			nodeToDelete = defaultList.get(nodePosition);
+			System.out.println("Node To Delete: " + nodeToDelete.data);
+			nodeToDelete.data = nodeToDelete.next.data;
+			nodeToDelete.next = nodeToDelete.next.next;
+			
+			System.out.println("The list after deleting the node is:");
+			defaultList.showCurrentList();
 		}
 }
 
