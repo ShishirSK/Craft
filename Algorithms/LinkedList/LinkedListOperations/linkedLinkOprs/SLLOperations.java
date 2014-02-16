@@ -1,5 +1,6 @@
 package linkedLinkOprs;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,23 +12,24 @@ import java.io.InputStreamReader;
  *  
  * @author 	- Shishir Kinkar 
  * @version - 0.1 	- Initial commit
- *			  
+ *			  0.2 	- Create SinglyLinkedList class and Node class
+ *					- Delete duplicates with buffer
  */
 
 public class SLLOperations {
 
-		static LinkedList<Integer> defaultList = new LinkedList<Integer>();
+		static SinglyLinkedList<Integer> defaultList = new SinglyLinkedList<Integer>();
 
 		public static void main(String[] args) throws IOException{	
-		
+					
 			// Create a default list
 			System.out.println("The default list elements are: ");
 			for	(int i = 1; i < 6; i++)	{
-				defaultList.add(i);
-				System.out.print(i + " ");	
+				System.out.println("Value of I" +i);
+				defaultList.addFirst(i);
+				System.out.println("Result: " +defaultList.get(i).data);
 			}
-			System.out.println();
-
+			
 			SLLOperations starter = new SLLOperations();
 			starter.menu();
 		}
@@ -79,7 +81,7 @@ public class SLLOperations {
 		void addNode() throws IOException {
 
 			int nodeValue = 0;
-			System.out.println(defaultList.size());
+//			System.out.println(defaultList.size());
 			System.out.print("Add a value of node to be added: ");
 
 			BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
@@ -91,8 +93,10 @@ public class SLLOperations {
 	            return;
 	        }
 
-			defaultList.add(nodeValue);
-			System.out.println(defaultList.size());
+			defaultList.addFirst(nodeValue);
+//			((SLLNode) defaultList).appendNode(nodeValue);
+			//System.out.println(defaultList.size());
+			menu();
 		}
 
 
@@ -102,9 +106,24 @@ public class SLLOperations {
 	 * @return 	- void 			
 	 */
 		void removeDuplicateWB(){
-
-
-
+			
+			Hashtable<Integer, Boolean> refTable = new Hashtable<Integer, Boolean>();
+			Node<Integer> currentNode = defaultList.getFirst();
+			while (currentNode != null){
+				System.out.println("Current Node: " +currentNode.data);
+				if (refTable.containsKey(currentNode.data)){
+					currentNode.data = currentNode.next.data;
+					currentNode.next = currentNode.next.next;
+					System.out.println("In here to remove it!!");
+				} else {
+					System.out.println("Not Found: Adding " +currentNode.data);
+					refTable.put((Integer) currentNode.data, true);
+					currentNode = currentNode.next;
+				}
+					
+			}
+			
+//			System.out.println("Remove with buffer: " + defaultList.size());	
 		}
 
 	/*
