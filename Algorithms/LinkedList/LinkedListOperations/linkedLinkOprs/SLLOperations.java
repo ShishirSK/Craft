@@ -159,8 +159,29 @@ public class SLLOperations {
 	 */
 		void removeDuplicateWOB(){
 
+			Node<Integer> refNode = defaultList.getFirst();
+			Node<Integer> currentNode = refNode.next;
+			Node<Integer> previous  = refNode;
+			previous.next = currentNode;
+		// refNode is static for each iteration, while checking for duplicate values in the 
+		// remainder of the list. 
+			defaultList.showCurrentList();
+			
+			while (refNode != null) {
+				previous  = refNode;
+				currentNode = refNode.next;
 
-
+				while (currentNode != null) {
+					if (currentNode.data == refNode.data){
+						previous.next = currentNode.next;
+					} else {
+						previous = currentNode;
+					}
+					currentNode = currentNode.next;
+				}
+				refNode = refNode.next;
+			}
+			defaultList.showCurrentList();
 		}
 
 	/*
