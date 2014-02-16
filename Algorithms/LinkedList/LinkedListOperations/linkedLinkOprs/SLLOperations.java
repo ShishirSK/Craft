@@ -23,11 +23,8 @@ public class SLLOperations {
 		public static void main(String[] args) throws IOException{	
 					
 			// Create a default list
-			System.out.println("The default list elements are: ");
 			for	(int i = 1; i < 6; i++)	{
-				System.out.println("Value of I" +i);
 				defaultList.addFirst(i);
-				System.out.println("Result: " +defaultList.get(i).data);
 			}
 			
 			SLLOperations starter = new SLLOperations();
@@ -43,11 +40,10 @@ public class SLLOperations {
 	 * @return 	- void
 	 * @throws	- IOException
 	 */
-
 		void menu() throws IOException {
 
 			int inputOption = 0;
-
+			// Create menu
 			System.out.println("Linked List operations: \n 1. Add nodes to the list"); 
 			System.out.println(" 2. Remove Duplicates (with buffer)");
 			System.out.println(" 3. Remove Duplicates (without buffer)"); 
@@ -78,10 +74,14 @@ public class SLLOperations {
 
 		}
 
+	/*
+	 * Method to add node at the beginning of the list
+	 * 
+	 * @return 	- void 			
+	 */
 		void addNode() throws IOException {
 
 			int nodeValue = 0;
-//			System.out.println(defaultList.size());
 			System.out.print("Add a value of node to be added: ");
 
 			BufferedReader opr = new BufferedReader(new InputStreamReader(System.in));
@@ -94,8 +94,7 @@ public class SLLOperations {
 	        }
 
 			defaultList.addFirst(nodeValue);
-//			((SLLNode) defaultList).appendNode(nodeValue);
-			//System.out.println(defaultList.size());
+			// Go back to the menu
 			menu();
 		}
 
@@ -109,21 +108,16 @@ public class SLLOperations {
 			
 			Hashtable<Integer, Boolean> refTable = new Hashtable<Integer, Boolean>();
 			Node<Integer> currentNode = defaultList.getFirst();
+			
 			while (currentNode != null){
-				System.out.println("Current Node: " +currentNode.data);
 				if (refTable.containsKey(currentNode.data)){
 					currentNode.data = currentNode.next.data;
 					currentNode.next = currentNode.next.next;
-					System.out.println("In here to remove it!!");
 				} else {
-					System.out.println("Not Found: Adding " +currentNode.data);
 					refTable.put((Integer) currentNode.data, true);
 					currentNode = currentNode.next;
-				}
-					
+				}		
 			}
-			
-//			System.out.println("Remove with buffer: " + defaultList.size());	
 		}
 
 	/*
