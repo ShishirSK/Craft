@@ -3,6 +3,7 @@
  * as per the selected sorting algorithm.
  * @author  - Shishir Kinkar
  * @version - 1.0 Initial program + Insertion sort
+ *			- 1.1 Selection sort
  */
 
 
@@ -35,10 +36,13 @@ public class Sorts{
 
         System.out.println("Sorting options are:");
         System.out.println("1. Insertion sort");
+        System.out.println("2. Selection sort");
         String choice = c.readLine("Choose the sort to implement: ");
 
         switch (choice){
         	case "1": sortedNumbers = currentSet.insertionSort(numbers);
+        			break;
+        	case "2": sortedNumbers = currentSet.selectionSort(numbers);
         			break;
         	default: System.out.println("Invalid option");
         			break;
@@ -81,4 +85,27 @@ public class Sorts{
 		return numbersToSort;
 	}
 
+
+/*
+ * Implmentation of Selection Sort
+ * @param  - interger array
+ * @return - integer array
+ */
+
+	int[] selectionSort(int[] numbersToSort){
+
+		int swapInt = 0;
+		for (int i = 0; i < numbersToSort.length; i++){
+
+			for (int j = i + 1; j < numbersToSort.length; j++) {
+
+				if (numbersToSort[j] < numbersToSort[i]){
+					swapInt = numbersToSort[i];
+					numbersToSort[i] = numbersToSort[j];
+					numbersToSort[j] = swapInt;
+				}
+			}
+		}
+		return numbersToSort;
+	}
 }
