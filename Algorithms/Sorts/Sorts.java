@@ -4,6 +4,7 @@
  * @author  - Shishir Kinkar
  * @version - 1.0 Initial program + Insertion sort
  *			- 1.1 Selection sort
+ *			- 1.2 Modularize the code
  */
 
 
@@ -40,28 +41,24 @@ public class Sorts{
         String choice = c.readLine("Choose the sort to implement: ");
 
         switch (choice){
-        	case "1": sortedNumbers = currentSet.insertionSort(numbers);
+        	case "1": currentSet.insertionSort(numbers);
         			break;
-        	case "2": sortedNumbers = currentSet.selectionSort(numbers);
+        	case "2": currentSet.selectionSort(numbers);
         			break;
         	default: System.out.println("Invalid option");
         			break;
         }
 
-        System.out.println("Sorted numbers are: "); 
-        for (int k = 0; k < arrayLength; k++){
-        	System.out.print(sortedNumbers[k] + " ");
-        }
-		System.out.println();
+
 	}
 
 /*
  * Implmentation of Insertion Sort
  * @param  - interger array
- * @return - integer array
+ * @return - void
  */
 
-	int[] insertionSort(int[] numbersToSort){
+	void insertionSort(int[] numbersToSort){
 
 		for (int i = 1; i < numbersToSort.length; i++){
 
@@ -81,18 +78,17 @@ public class Sorts{
 			numbersToSort[j + 1] = key;
 
 		}
-		
-		return numbersToSort;
+		showResult(numbersToSort);
 	}
 
 
 /*
  * Implmentation of Selection Sort
  * @param  - interger array
- * @return - integer array
+ * @return - void
  */
 
-	int[] selectionSort(int[] numbersToSort){
+	void selectionSort(int[] numbersToSort){
 
 		int swapInt = 0;
 		for (int i = 0; i < numbersToSort.length; i++){
@@ -106,6 +102,24 @@ public class Sorts{
 				}
 			}
 		}
-		return numbersToSort;
+		showResult(numbersToSort);
 	}
+
+/*
+ * Method to print out the sorted results 
+ * @param  - interger array
+ * @return - void
+ */
+
+	void showResult(int[] sortedNumbers){
+
+		System.out.println("Sorted numbers are: "); 
+        for (int k = 0; k < sortedNumbers.length; k++){
+        	System.out.print(sortedNumbers[k] + " ");
+        }
+		System.out.println();
+
+	}
+
+
 }
