@@ -17,7 +17,19 @@ public class Sorts{
 	public static void main(String[] args) throws IOException {
 
 		Sorts currentSet = new Sorts();
-		Console c = System.console();
+		currentSet.menu();
+
+	}
+
+/*
+ * Method to display the menu
+ * @param  - none
+ * @return - void
+ */
+
+ 	void menu(){
+
+ 		Console c = System.console();
 
 		if (c == null){
             System.err.println("No console.");
@@ -41,16 +53,15 @@ public class Sorts{
         String choice = c.readLine("Choose the sort to implement: ");
 
         switch (choice){
-        	case "1": currentSet.insertionSort(numbers);
+        	case "1": insertionSort(numbers);
         			break;
-        	case "2": currentSet.selectionSort(numbers);
+        	case "2": selectionSort(numbers);
         			break;
         	default: System.out.println("Invalid option");
         			break;
         }
+ 	}
 
-
-	}
 
 /*
  * Implmentation of Insertion Sort
