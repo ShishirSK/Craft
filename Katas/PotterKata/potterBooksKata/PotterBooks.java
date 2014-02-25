@@ -104,14 +104,15 @@ public class PotterBooks {
 
 		int[] setsOfBooks = new int[5];
 
-		setsOfBooks[0] = bookCopies[0];
-		setsOfBooks[1] = bookCopies[1] - setsOfBooks[0];
-		setsOfBooks[2] = bookCopies[2] - setsOfBooks[1] - setsOfBooks[0];
-		setsOfBooks[3] = bookCopies[3] - setsOfBooks[2] - setsOfBooks[1]
-				- setsOfBooks[0];
-		setsOfBooks[4] = bookCopies[4] - setsOfBooks[3] - setsOfBooks[2]
-				- setsOfBooks[1] - setsOfBooks[0];
-
+		int j = 0;
+		for (int i = 4; i >= 0; i--) {
+			if (i > 0) {
+				setsOfBooks[i] = bookCopies[i] - bookCopies[i - 1];
+			} else {
+				setsOfBooks[i] = bookCopies[i];
+			}
+			j++;
+		}
 		return setsOfBooks;
 	}
 
