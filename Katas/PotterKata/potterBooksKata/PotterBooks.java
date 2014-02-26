@@ -12,11 +12,13 @@ import java.util.Arrays;
  * 
  * @version - 0.1 	- Initial commit
  *			  0.2 	- Necessary methods + comments
+ *			  1.0   - Refactored
  */
 
 public class PotterBooks {
 
 	private static int setsOf5 = 0, setsOf4 = 0, setsOf3 = 0;
+	private static int bookCost = 8;
 
 	public static void main(String[] args) throws IOException {
 
@@ -41,40 +43,15 @@ public class PotterBooks {
 		int[] optimizedSetsOfBooks;
 		double totalAmount;
 
-		System.out.println("Enter the number of copies for each books:");
+		System.out
+				.println("Enter the number of copies for each of the 5 books:");
 		BufferedReader bookCount = new BufferedReader(new InputStreamReader(
 				System.in));
-		// Book 1
-		System.out.print("Book 1: ");
 		try {
 			bookArray[0] = Integer.parseInt(bookCount.readLine());
-		} catch (NumberFormatException nfe) {
-			System.err.println("Invalid Format!");
-		}
-		// Book 2
-		System.out.print("Book 2: ");
-		try {
 			bookArray[1] = Integer.parseInt(bookCount.readLine());
-		} catch (NumberFormatException nfe) {
-			System.err.println("Invalid Format!");
-		}
-		// Book 3
-		System.out.print("Book 3: ");
-		try {
 			bookArray[2] = Integer.parseInt(bookCount.readLine());
-		} catch (NumberFormatException nfe) {
-			System.err.println("Invalid Format!");
-		}
-		// Book 4
-		System.out.print("Book 4: ");
-		try {
 			bookArray[3] = Integer.parseInt(bookCount.readLine());
-		} catch (NumberFormatException nfe) {
-			System.err.println("Invalid Format!");
-		}
-		// Book 5
-		System.out.print("Book 5: ");
-		try {
 			bookArray[4] = Integer.parseInt(bookCount.readLine());
 		} catch (NumberFormatException nfe) {
 			System.err.println("Invalid Format!");
@@ -84,8 +61,14 @@ public class PotterBooks {
 		Arrays.sort(bookArray);
 		// Make sets of books
 		originalSetsOfBooks = makeBookSets(bookArray);
-		// Optimize sets for max discount
-		optimizedSetsOfBooks = optimizeBookSets(originalSetsOfBooks);
+		// Optimize sets for max discount if sets of 5 and 3 are present in the
+		// set
+		if (originalSetsOfBooks[0] != 0 && originalSetsOfBooks[2] != 0) {
+			optimizedSetsOfBooks = optimizeBookSets(originalSetsOfBooks);
+		} else {
+			optimizedSetsOfBooks = originalSetsOfBooks;
+		}
+
 		// Calculate amount
 		totalAmount = calculateTotalAmount(optimizedSetsOfBooks);
 
@@ -104,14 +87,12 @@ public class PotterBooks {
 
 		int[] setsOfBooks = new int[5];
 
-		int j = 0;
 		for (int i = 4; i >= 0; i--) {
 			if (i > 0) {
 				setsOfBooks[i] = bookCopies[i] - bookCopies[i - 1];
 			} else {
 				setsOfBooks[i] = bookCopies[i];
 			}
-			j++;
 		}
 		return setsOfBooks;
 	}
@@ -155,12 +136,14 @@ public class PotterBooks {
 	private double calculateTotalAmount(int[] optimizedSetsOfBooks) {
 
 		double amount = 0.0;
+		double[] discountRate = { 0.75, 0.8, 0.9, 0.95, 1.0 };
+		int bookCount = 5;
 
-		amount = amount + optimizedSetsOfBooks[0] * 5 * 8 * 0.75;
-		amount = amount + optimizedSetsOfBooks[1] * 4 * 8 * 0.80;
-		amount = amount + optimizedSetsOfBooks[2] * 3 * 8 * 0.90;
-		amount = amount + optimizedSetsOfBooks[3] * 2 * 8 * 0.95;
-		amount = amount + optimizedSetsOfBooks[4] * 1 * 8 * 1;
+		for (int i = 0; i < 5; i++) {
+			amount = amount + optimizedSetsOfBooks[i] * bookCount * bookCost
+					* discountRate[i];
+			bookCount--;
+		}
 
 		return amount;
 	}
