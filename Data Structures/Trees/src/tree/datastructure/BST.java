@@ -81,6 +81,34 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return null;
 	}
 
+	/*
+	 * Method to return the minimum value in the tree
+	 * 
+	 * @return Value - value of the min node
+	 */
+	public Value min() {
+
+		Node currentNode = root;
+		while (currentNode.left != null) {
+			currentNode = currentNode.left;
+		}
+		return currentNode.val;
+	}
+
+	/*
+	 * Method to return the maximum value in the tree
+	 * 
+	 * @return Value - value of the max node
+	 */
+	public Value max() {
+
+		Node currentNode = root;
+		while (currentNode.right != null) {
+			currentNode = currentNode.right;
+		}
+		return currentNode.val;
+	}
+
 	public boolean delete(Key key) {
 		return false;
 	}
