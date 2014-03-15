@@ -20,7 +20,26 @@ public class BST<Key extends Comparable<Key>, Value> {
 
 	}
 
-	public Value get(Key key) {
+	/*
+	 * Method to get the value of a key from the tree
+	 * 
+	 * @return value - if key is present, null - if key is not present
+	 */
+	public Value get(Key checkKey) {
+
+		Node x = root;
+		while (x != null) {
+			int compareResult = checkKey.compareTo(x.key);
+			if (compareResult < 0) {
+				x = x.left;
+			}
+			if (compareResult > 0) {
+				x = x.right;
+			}
+			if (compareResult == 0) {
+				return x.val;
+			}
+		}
 		return null;
 	}
 
