@@ -11,8 +11,7 @@ public class MarsRover {
 
 		planetGrid.showGrid();
 
-		// Get a rover and place it on the grid
-
+		// Place the rover on the grid
 		boolean roverPlaced = aRover.placeRover(planetGrid, 0, 0);
 		if (roverPlaced) {
 			planetGrid.setPosition(0, 0);
@@ -35,23 +34,29 @@ public class MarsRover {
 				'b' };
 		for (int i = 0; i < commands.length; i++) {
 			if (commands[i] == 'f' || commands[i] == 'b') {
-				nextPos = roverStuff.getNextBotPosition(aRover.getxPos(),
+				// Get next position for Forward and Backward commands
+				nextPos = roverStuff.getNextRoverPosition(aRover.getxPos(),
 						aRover.getyPos(), aRover.getDirection(), commands[i]);
+				// Check if the next position is valid
 				isValidPosition = planetGrid.isPositionEmpty(nextPos[0],
 						nextPos[1]);
+				// If valid, move rover to that position
 				if (isValidPosition) {
 					planetGrid.updateRoverPosition(aRover.getxPos(),
 							aRover.getyPos(), nextPos[0], nextPos[1]);
 					aRover.setxPos(nextPos[0]);
 					aRover.setyPos(nextPos[1]);
 				} else {
+					// Else angry error message
 					System.out.println("That position at " + "[" + nextPos[0]
 							+ ", " + nextPos[1] + "]"
 							+ " is occupied! Are you trying to damage me?!");
-					System.out.println("Am not taking anymore commands from you!!");
+					System.out
+							.println("Am not taking anymore commands from you!!");
 					break;
 				}
 			} else if (commands[i] == 'l' || commands[i] == 'r') {
+				// Change direction for Left and Right commands
 				newDir = roverStuff.turnRover(aRover.getDirection(),
 						commands[i]);
 				aRover.setDirection(newDir);
@@ -59,6 +64,5 @@ public class MarsRover {
 			planetGrid.showGrid();
 		}
 		planetGrid.showGrid();
-		// roverStuff.move();
 	}
 }

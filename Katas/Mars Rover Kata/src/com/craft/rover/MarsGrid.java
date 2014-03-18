@@ -24,6 +24,14 @@ public class MarsGrid {
 		this.gridHeight = gridHeight;
 	}
 
+	public int[][] getGrid() {
+		return grid;
+	}
+
+	public void setGrid(int[][] grid) {
+		this.grid = grid;
+	}
+
 	public MarsGrid() {
 
 		grid = new int[gridWidth][gridHeight];
@@ -66,22 +74,20 @@ public class MarsGrid {
 		}
 		return true;
 	}
-	
+
 	/*
 	 * Set the rover position
-	 * 
 	 */
-	public void setPosition(int x, int y){
-		grid[x][y] = 8;		
+	public void setPosition(int x, int y) {
+		grid[x][y] = 8;
 	}
-	
+
 	/*
 	 * Update the rover position
-	 * 
 	 */
-	public void updateRoverPosition(int currX, int currY, int nextX, int nextY){
+	public void updateRoverPosition(int currX, int currY, int nextX, int nextY) {
 		grid[currX][currY] = 0;
 		grid[nextX][nextY] = 8;
 	}
-	
+
 }

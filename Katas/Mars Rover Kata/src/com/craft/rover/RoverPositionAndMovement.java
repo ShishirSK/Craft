@@ -38,7 +38,7 @@ public class RoverPositionAndMovement {
 	 *            - Forward / backward movement
 	 * @return - Next position coordinates
 	 */
-	public int[] getNextBotPosition(int x, int y, Direction dir, char move) {
+	public int[] getNextRoverPosition(int x, int y, Direction dir, char move) {
 		char movDir = Character.toLowerCase(move);
 		int[] nextPos = new int[2];
 
