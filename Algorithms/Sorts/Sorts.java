@@ -1,5 +1,11 @@
+import java.io.Console;
+import java.util.Arrays;
+import java.io.IOException;
+
+import mergeSort.MergeSort;
+
 /*
- * Implmentation of Various Sorts - A single interface to take several numbers and sort them 
+ * Implementation of Various Sorts - A single interface to take several numbers and sort them 
  * as per the selected sorting algorithm.
  * @author  - Shishir Kinkar
  * @version - 1.0 Initial program + Insertion sort
@@ -7,13 +13,8 @@
  *			- 1.2 Modularize the code
  */
 
+public class Sorts {
 
-import java.io.Console;
-import java.util.Arrays;
-import java.io.IOException;
-
-public class Sorts{
-	
 	public static void main(String[] args) throws IOException {
 
 		Sorts currentSet = new Sorts();
@@ -21,67 +22,76 @@ public class Sorts{
 
 	}
 
-/*
- * Method to display the menu
- * @param  - none
- * @return - void
- */
+	/*
+	 * Method to display the menu
+	 * 
+	 * @param - none
+	 * 
+	 * @return - void
+	 */
 
- 	void menu(){
+	void menu() {
 
- 		Console c = System.console();
+		Console c = System.console();
 
-		if (c == null){
-            System.err.println("No console.");
-            System.exit(1);
-        }
+		if (c == null) {
+			System.err.println("No console.");
+			System.exit(1);
+		}
 
-// Replace console read by bufferedReader?        
-        String nums = c.readLine("Enter the size of the number set: ");
-        
-        int arrayLength = Integer.parseInt(nums);       
-        int[] numbers = new int[arrayLength];
-        int[] sortedNumbers = new int[arrayLength];
-        
-        for (int i = 1; i <= arrayLength; i++) {
-        	numbers[i - 1] = Integer.parseInt(c.readLine("Enter number " + i + ": "));
-        }        
+		// Replace console read by bufferedReader?
+		String nums = c.readLine("Enter the size of the number set: ");
 
-        System.out.println("Sorting options are:");
-        System.out.println("1. Insertion sort");
-        System.out.println("2. Selection sort");
-        String choice = c.readLine("Choose the sort to implement: ");
+		int arrayLength = Integer.parseInt(nums);
+		int[] numbers = new int[arrayLength];
+		int[] sortedNumbers = new int[arrayLength];
 
-        switch (choice){
-        	case "1": insertionSort(numbers);
-        			break;
-        	case "2": selectionSort(numbers);
-        			break;
-        	default: System.out.println("Invalid option");
-        			break;
-        }
- 	}
+		for (int i = 1; i <= arrayLength; i++) {
+			numbers[i - 1] = Integer.parseInt(c.readLine("Enter number " + i
+					+ ": "));
+		}
 
+		System.out.println("Sorting options are:");
+		System.out.println("1. Insertion sort");
+		System.out.println("2. Selection sort");
+		String choice = c.readLine("Choose the sort to implement: ");
 
-/*
- * Implmentation of Insertion Sort
- * @param  - interger array
- * @return - void
- */
+		switch (choice) {
+		case "1":
+			insertionSort(numbers);
+			break;
+		case "2":
+			selectionSort(numbers);
+			break;
+		case "3":
+			mergeSort(numbers);
+			break;
+		default:
+			System.out.println("Invalid option");
+			break;
+		}
+	}
 
-	void insertionSort(int[] numbersToSort){
+	/*
+	 * Implementation of Insertion Sort
+	 * 
+	 * @param - interger array
+	 * 
+	 * @return - void
+	 */
 
-		for (int i = 1; i < numbersToSort.length; i++){
+	void insertionSort(int[] numbersToSort) {
+
+		for (int i = 1; i < numbersToSort.length; i++) {
 
 			int key = numbersToSort[i];
-			int j   = i - 1;
+			int j = i - 1;
 
-			while (j >= 0){
+			while (j >= 0) {
 
-				if (numbersToSort[j] > key){
+				if (numbersToSort[j] > key) {
 					numbersToSort[j + 1] = numbersToSort[j];
-				}
-				else{
+				} else {
 					break;
 				}
 				j--;
@@ -92,21 +102,22 @@ public class Sorts{
 		showResult(numbersToSort);
 	}
 
+	/*
+	 * Implementation of Selection Sort
+	 * 
+	 * @param - interger array
+	 * 
+	 * @return - void
+	 */
 
-/*
- * Implmentation of Selection Sort
- * @param  - interger array
- * @return - void
- */
-
-	void selectionSort(int[] numbersToSort){
+	void selectionSort(int[] numbersToSort) {
 
 		int swapInt = 0;
-		for (int i = 0; i < numbersToSort.length; i++){
+		for (int i = 0; i < numbersToSort.length; i++) {
 
 			for (int j = i + 1; j < numbersToSort.length; j++) {
 
-				if (numbersToSort[j] < numbersToSort[i]){
+				if (numbersToSort[j] < numbersToSort[i]) {
 					swapInt = numbersToSort[i];
 					numbersToSort[i] = numbersToSort[j];
 					numbersToSort[j] = swapInt;
@@ -116,21 +127,37 @@ public class Sorts{
 		showResult(numbersToSort);
 	}
 
-/*
- * Method to print out the sorted results 
- * @param  - interger array
- * @return - void
- */
+	/*
+	 * Method to print out the sorted results
+	 * 
+	 * @param - interger array
+	 * 
+	 * @return - void
+	 */
 
-	void showResult(int[] sortedNumbers){
+	void showResult(int[] sortedNumbers) {
 
-		System.out.println("Sorted numbers are: "); 
-        for (int k = 0; k < sortedNumbers.length; k++){
-        	System.out.print(sortedNumbers[k] + " ");
-        }
+		System.out.println("Sorted numbers are: ");
+		for (int k = 0; k < sortedNumbers.length; k++) {
+			System.out.print(sortedNumbers[k] + " ");
+		}
 		System.out.println();
 
 	}
 
+	/*
+	 * Method to call MergeSort
+	 * 
+	 * @param - integer array
+	 */
+	@SuppressWarnings("null")
+	private void mergeSort(int[] numbers) {
 
+		Comparable[] portedNumbers = null;
+		for (int i = 0; i < numbers.length; i++) {
+			portedNumbers[i] = numbers[i];
+		}
+		MergeSort.sort(portedNumbers);
+
+	}
 }
