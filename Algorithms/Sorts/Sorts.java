@@ -1,5 +1,4 @@
 import java.io.Console;
-import java.util.Arrays;
 import java.io.IOException;
 
 import mergeSort.MergeSort;
@@ -11,6 +10,7 @@ import mergeSort.MergeSort;
  * @version - 1.0 Initial program + Insertion sort
  *			- 1.1 Selection sort
  *			- 1.2 Modularize the code
+ *			- 1.3 Merge Sort added
  */
 
 public class Sorts {
