@@ -4,41 +4,93 @@ import java.util.Comparator;
 
 public class MergeSort {
 
-	public static void sort(@SuppressWarnings("rawtypes") Comparable[] toBeSorted) {
+	/*
+	 * Public sort method called for sorting the array
+	 * 
+	 * @param - toBeSorted - array to be sorted
+	 */
+	public static void sort(Comparable[] toBeSorted) {
 
 		Comparable[] copyArray = new Comparable[toBeSorted.length];
 		sort(toBeSorted, copyArray, 0, toBeSorted.length);
 
+		// Additional method to print out the results
+		showResult(copyArray);
 	}
 
+	/*
+	 * Sort method that is called recursively for sorting the array
+	 * 
+	 * @param - toBeSorted - array to be sorted
+	 * 
+	 * @param - copyArray - array to save sorted results
+	 * 
+	 * @param - low - least value of the passed values
+	 * 
+	 * @param - high - highest value of the passes values
+	 */
 	private static void sort(Comparable[] toBeSorted, Comparable[] copyArray,
 			int low, int high) {
 
-		if (high <= low) return;
+		if (high <= low)
+			return;
 		int mid = low + (high - low) / 2;
 		sort(toBeSorted, copyArray, low, mid);
 		sort(toBeSorted, copyArray, mid + 1, high);
 		merge(toBeSorted, copyArray, low, mid, high);
 	}
 
-	private static void merge(Comparable[] toBeSorted, Comparable[] copyArray, int low, int mid, int high){
-		
-//		assert isSorted(toBeSorted, low, mid);
-		
-		for(int k = low; k <= high; k++){
+	/*
+	 * Method to merge two individual sorted halves of an array
+	 * 
+	 * @param - toBeSorted - array to be sorted
+	 * 
+	 * @param - copyArray - array to save sorted results
+	 * 
+	 * @param - low - least value of the passed values
+	 * 
+	 * @param - mid - mid value of the passes values
+	 * 
+	 * @param - high - highest value of the passes values
+	 */
+	private static void merge(Comparable[] toBeSorted, Comparable[] copyArray,
+			int low, int mid, int high) {
+
+		// assert isSorted(toBeSorted, low, mid);
+
+		for (int k = low; k <= high; k++) {
 			copyArray[k] = toBeSorted[k];
 		}
-		
+
 		int i = low, j = mid + 1;
-		for (int k = low; k <= high; k++){
-			if 	(i > mid) 				toBeSorted[k] = copyArray[j++];
-			else if (j > high)			toBeSorted[k] = copyArray[j++];
-			else if (less(null, copyArray[j], copyArray[i]))	toBeSorted[k] = copyArray[j++];
-			else 						toBeSorted[k] = copyArray[j++];
+		for (int k = low; k <= high; k++) {
+			if (i > mid)
+				toBeSorted[k] = copyArray[j++];
+			else if (j > high)
+				toBeSorted[k] = copyArray[j++];
+			else if (less(null, copyArray[j], copyArray[i]))
+				toBeSorted[k] = copyArray[j++];
+			else
+				toBeSorted[k] = copyArray[j++];
 		}
 	}
-	
-	private static boolean less(Comparator<Object> c, Object v, Object w){ 
-		return c.compare(v, w) < 0; 
+
+	private static boolean less(Comparator<Object> c, Object v, Object w) {
+		return c.compare(v, w) < 0;
+	}
+
+	/*
+	 * Method to print out the sorted numbers
+	 * 
+	 * @param - Array of comparable objects
+	 */
+	static void showResult(Comparable[] sortedNumbers) {
+
+		System.out.println("Sorted numbers are: ");
+		for (int k = 0; k < sortedNumbers.length; k++) {
+			System.out.print(sortedNumbers[k] + " ");
+		}
+		System.out.println();
+
 	}
 }
