@@ -14,8 +14,6 @@ public class MergeSort {
 		Comparable[] copyArray = new Comparable[toBeSorted.length];
 		sort(toBeSorted, copyArray, 0, toBeSorted.length);
 
-		// Additional method to print out the results
-		showResult(copyArray);
 	}
 
 	/*
@@ -77,20 +75,5 @@ public class MergeSort {
 
 	private static boolean less(Comparator<Object> c, Object v, Object w) {
 		return c.compare(v, w) < 0;
-	}
-
-	/*
-	 * Method to print out the sorted numbers
-	 * 
-	 * @param - Array of comparable objects
-	 */
-	static void showResult(Comparable[] sortedNumbers) {
-
-		System.out.println("Sorted numbers are: ");
-		for (int k = 0; k < sortedNumbers.length; k++) {
-			System.out.print(sortedNumbers[k] + " ");
-		}
-		System.out.println();
-
 	}
 }
