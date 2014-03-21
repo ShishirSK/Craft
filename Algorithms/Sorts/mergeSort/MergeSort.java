@@ -67,7 +67,7 @@ public class MergeSort {
 			if (i > mid)
 				toBeSorted[k] = copyArray[j++];
 			else if (j > high)
-				toBeSorted[k] = copyArray[j++];
+				toBeSorted[k] = copyArray[i++];
 			else if (less(null, copyArray[j], copyArray[i]))
 				toBeSorted[k] = copyArray[j++];
 			else
