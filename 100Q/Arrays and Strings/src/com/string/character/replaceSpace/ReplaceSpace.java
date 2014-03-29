@@ -47,7 +47,7 @@ public class ReplaceSpace {
 		}
 
 		// 1 Space replaced by 3 characters (%20)
-		newLength = (spaceCount * 3) + strLength;
+		newLength = (spaceCount * 2) + strLength;
 		char[] newArray = new char[newLength];
 		newIndex = newLength - 1;
 

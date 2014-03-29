@@ -215,7 +215,7 @@ public class StringOperations{
 	}
 
 /*
- * Returns size of string pasees by the strRepeatCount string compression method
+ * Returns size of string passed by the strRepeatCount string compression method
  * 
  * @param 	- str 	 - String to check the size of
  * @return 	- int 	 - The size of the string
