@@ -17,7 +17,7 @@ public class FeedAnimals {
 	private static List<String> foodType = new ArrayList<String>();
 	private static int foodQuantity = 0;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		options();
 	}
@@ -25,7 +25,7 @@ public class FeedAnimals {
 	/**
 	 * Method to take user input for desired action
 	 */
-	public static void options() {
+	public static void options() throws Exception {
 
 		int userChoice = 0;
 		System.out.println("Choose option:");
@@ -36,14 +36,17 @@ public class FeedAnimals {
 				System.in));
 		try {
 			userChoice = Integer.parseInt(reader.readLine());
+			switch (userChoice) {
+			case 1:
+				getAnimalAndFoodAndQuantity();
+				break;
+			case 2:
+				feedAnimalsNow();
+				break;
+			}
 		} catch (Exception e) {
 			System.out.println("Errored! " + e);
-		}
-		switch (userChoice) {
-		case 1:
-			getAnimalAndFoodAndQuantity();
-		case 2:
-			feedAnimalsNow();
+			throw e;
 		}
 
 	}
@@ -60,12 +63,13 @@ public class FeedAnimals {
 				System.in));
 		try {
 			userInput = reader.readLine();
+			String[] animalFood = userInput.split(" ");
+			getAnimal(animalFood);
+			options();
 		} catch (Exception e) {
-			System.out.println("Errored! " + e);
+			System.out.println("Errored! " + e.getMessage());
 		}
-		String[] animalFood = userInput.split(" ");
-		getAnimal(animalFood);
-		options();
+
 	}
 
 	/**
