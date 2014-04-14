@@ -45,6 +45,18 @@ public class TestBST {
 	
 	@Test
 	public void inOrder(){
+		System.out.println();
 		bst.inOrder();
+	}
+	
+	@Test
+	public void preOrder(){
+		bst.preOrder();
+	}
+	
+	@Test
+	public void postOrder(){
+		System.out.println();
+		bst.postOrder();
 	}
 }

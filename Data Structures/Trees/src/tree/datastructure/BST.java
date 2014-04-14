@@ -17,7 +17,6 @@ public class BST<Key extends Comparable<Key>, Value> {
 		private Key key;
 		private Value val;
 		private Node left, right;
-		private int visited = 0;
 
 		public Node(Key key, Value val) {
 			this.key = key;
@@ -121,31 +120,69 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return null;
 	}
 
+	// Traverse the tree in-order and show node values
 	public void inOrder() {
+		System.out.println("In-order values of tree nodes: ");
 		inOrder(root);
 	}
 
-	public void inOrder(Node x) {
+	// Overloaded method for in-order tree traversal
+	private void inOrder(Node x) {
 
 		if (x.left == null && x.right == null) {
-			System.out.println(x.val + " ");
-			x.visited = 1;
+			System.out.print(x.val + " ");
 			return;
 		}
-
-		if (x.left == null) {
-			System.out.println(x.val + " ");
-		} else {
+		if (x.left == null)
+			System.out.print(x.val + " ");
+		else {
 			inOrder(x.left);
-			System.out.println(x.val + " ");
+			System.out.print(x.val + " ");
 		}
-
-		if (x.right == null) {
-			System.out.println(x.val + " ");
-		} else {
+		if (x.right == null)
+			System.out.print(x.val + " ");
+		else
 			inOrder(x.right);
-//			System.out.println(x.val + " ");
-		}
 		return;
 	}
+
+	// Traverse the tree in pre-order and show node values
+	public void preOrder() {
+		System.out.println("Pre-ordered values of tree nodes: ");
+		preOrder(root);
+	}
+
+	// Overloaded method for in pre-order tree traversal
+	private void preOrder(Node x) {
+		System.out.print(x.val + " ");
+		if (x.left == null && x.right == null)
+			return;
+		if (x.left != null)
+			preOrder(x.left);
+		if (x.right != null)
+			preOrder(x.right);
+		return;
+	}
+
+	// Traverse the tree in post-order and show node values
+	public void postOrder() {
+		System.out.println("Post-ordered values of tree nodes: ");
+		postOrder(root);
+	}
+
+	// Overloaded method for in post-order tree traversal
+	private void postOrder(Node x) {
+
+		if (x.left == null && x.right == null) {
+			System.out.print(x.val + " ");
+			return;
+		}
+		if (x.left != null)
+			postOrder(x.left);
+		if (x.right != null)
+			postOrder(x.right);
+		System.out.print(x.val + " ");
+		return;
+	}
+
 }
