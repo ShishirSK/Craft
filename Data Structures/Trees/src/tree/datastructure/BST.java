@@ -17,6 +17,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		private Key key;
 		private Value val;
 		private Node left, right;
+		private int visited = 0;
 
 		public Node(Key key, Value val) {
 			this.key = key;
@@ -35,13 +36,16 @@ public class BST<Key extends Comparable<Key>, Value> {
 		root = put(root, Key, Val);
 	}
 
-	/*
+	/**
 	 * Overloaded method to put nodes into a BST
 	 * 
+	 * @param currentNode
+	 *            - current node object
+	 * @param pKey
+	 *            - key of the node
+	 * @param pVal
+	 *            - value of the node
 	 * @return Node - returns a node object
-	 * 
-	 * @param currentNode - current node object, pKey - key of the node, pVal -
-	 * value of the node
 	 */
 	private Node put(Node currentNode, Key pKey, Value pVal) {
 
@@ -115,5 +119,33 @@ public class BST<Key extends Comparable<Key>, Value> {
 
 	public Iterable<Key> iterator() {
 		return null;
+	}
+
+	public void inOrder() {
+		inOrder(root);
+	}
+
+	public void inOrder(Node x) {
+
+		if (x.left == null && x.right == null) {
+			System.out.println(x.val + " ");
+			x.visited = 1;
+			return;
+		}
+
+		if (x.left == null) {
+			System.out.println(x.val + " ");
+		} else {
+			inOrder(x.left);
+			System.out.println(x.val + " ");
+		}
+
+		if (x.right == null) {
+			System.out.println(x.val + " ");
+		} else {
+			inOrder(x.right);
+//			System.out.println(x.val + " ");
+		}
+		return;
 	}
 }
