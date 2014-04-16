@@ -221,48 +221,47 @@ public class BST<Key extends Comparable<Key>, Value> {
 	 * @return boolean - whether tree is balanced or not
 	 */
 	public boolean isBalanced() {
-		int diff = 0;
-		diff = getHeight(root);
-		System.out.println("Diff:" + diff);
-		if (diff > 1)
+		int height = 0;
+		height = getHeight(root);
+		if (height == -1)
 			return false;
 		else
 			return true;
 	}
 
 	/**
-	 * Method to calculate the difference in heights of sub trees
+	 * Method to return the height of the tree and tell if it is unbalanced.
+	 * Returns the height of the tree otherwise
 	 * 
 	 * @param x
 	 *            - Node
-	 * @return - Height difference
+	 * @return - int - Height or -1
 	 */
 	private int getHeight(Node x) {
 
-		if (x.left == null && x.right == null)
+		if (x == null)
 			return 0;
+
 		// Left branch
-		int lHeight = 0;
-		if (x.left != null) {
-			lHeight = 1;
-			int height = getHeight(x.left);
-			if (height > 1)
-				return height; // Return if height difference becomes > 1
-			else
-				lHeight += height;
-		}
+		int lHeight = getHeight(x.left);
+		if (lHeight == -1)
+			return lHeight;
+
 		// Right branch
-		int rHeight = 0;
-		if (x.right != null) {
-			rHeight = 1;
-			int height = getHeight(x.right);
-			if (height > 1)
-				return height; // Return if height difference becomes > 1
-			else
-				rHeight += height;
+		int rHeight = getHeight(x.right);
+		if (rHeight == -1)
+			return rHeight;
+
+		int heightDiff = lHeight - rHeight;
+		// Parameter to control allowed difference
+		if (Math.abs(heightDiff) > 1) {
+			System.out.println("Height Difference: " + heightDiff);
+			return -1;
+		} else {
+			// System.out.println("Height of tree: " + (Math.max(lHeight,
+			// rHeight) + 1)); // For checking tree height
+			return Math.max(lHeight, rHeight) + 1;
 		}
 
-		int diff = lHeight - rHeight;
-		return (diff < 0) ? -diff : diff;
 	}
 }
