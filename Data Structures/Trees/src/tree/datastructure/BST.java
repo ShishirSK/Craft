@@ -1,10 +1,15 @@
 package tree.datastructure;
 
-/*
- * A binary search tree implementation 
+/**
+ * A binary search tree implementation. Also includes solutions to some problems
+ * based on the Tree data structure
  * 
  * @author Shishir Kinkar
  * 
+ * @param <Key>
+ *            - Key of the node
+ * @param <Value>
+ *            - Value of the node
  */
 public class BST<Key extends Comparable<Key>, Value> {
 
@@ -61,12 +66,12 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return currentNode;
 	}
 
-	/*
+	/**
 	 * Method to get the value of a key from the tree
 	 * 
-	 * @return value - if key is present, null - if key is not present
-	 * 
-	 * @param checkKey - key to check
+	 * @param checkKey
+	 *            - key to check
+	 * @return value - if key is present null - if key is not present
 	 */
 	public Value get(Key checkKey) {
 
@@ -84,10 +89,10 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return null;
 	}
 
-	/*
+	/**
 	 * Method to return the minimum value in the tree
 	 * 
-	 * @return Value - value of the min node
+	 * @return Value - value of the minimum node
 	 */
 	public Value min() {
 
@@ -98,7 +103,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return currentNode.val;
 	}
 
-	/*
+	/**
 	 * Method to return the maximum value in the tree
 	 * 
 	 * @return Value - value of the max node
@@ -112,21 +117,28 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return currentNode.val;
 	}
 
-	public boolean delete(Key key) {
-		return false;
-	}
+	// public boolean delete(Key key) {
+	// return false;
+	// }
+	//
+	// public Iterable<Key> iterator() {
+	// return null;
+	// }
 
-	public Iterable<Key> iterator() {
-		return null;
-	}
-
-	// Traverse the tree in-order and show node values
+	/**
+	 * Traverse the tree in-order and show node values
+	 */
 	public void inOrder() {
 		System.out.println("In-order values of tree nodes: ");
 		inOrder(root);
 	}
 
-	// Overloaded method for in-order tree traversal
+	/**
+	 * Overloaded method for in-order tree traversal
+	 * 
+	 * @param x
+	 *            - Node
+	 */
 	private void inOrder(Node x) {
 
 		if (x.left == null && x.right == null) {
@@ -146,13 +158,20 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return;
 	}
 
-	// Traverse the tree in pre-order and show node values
+	/**
+	 * Traverse the tree in pre-order and show node values
+	 */
 	public void preOrder() {
 		System.out.println("Pre-ordered values of tree nodes: ");
 		preOrder(root);
 	}
 
-	// Overloaded method for in pre-order tree traversal
+	/**
+	 * Overloaded method for in pre-order tree traversal
+	 * 
+	 * @param x
+	 *            - Node
+	 */
 	private void preOrder(Node x) {
 		System.out.print(x.val + " ");
 		if (x.left == null && x.right == null)
@@ -164,13 +183,20 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return;
 	}
 
-	// Traverse the tree in post-order and show node values
+	/**
+	 * Traverse the tree in post-order and show node values
+	 */
 	public void postOrder() {
 		System.out.println("Post-ordered values of tree nodes: ");
 		postOrder(root);
 	}
 
-	// Overloaded method for in post-order tree traversal
+	/**
+	 * Overloaded method for in post-order tree traversal
+	 * 
+	 * @param x
+	 *            - Node
+	 */
 	private void postOrder(Node x) {
 
 		if (x.left == null && x.right == null) {
@@ -185,4 +211,58 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return;
 	}
 
+	//
+	/**
+	 * Check that the tree is balanced
+	 * 
+	 * Balanced (according to the problem definition) means that the height of
+	 * any of the subtrees of the tree-node should not be greater than one
+	 * 
+	 * @return boolean - whether tree is balanced or not
+	 */
+	public boolean isBalanced() {
+		int diff = 0;
+		diff = getHeight(root);
+		System.out.println("Diff:" + diff);
+		if (diff > 1)
+			return false;
+		else
+			return true;
+	}
+
+	/**
+	 * Method to calculate the difference in heights of sub trees
+	 * 
+	 * @param x
+	 *            - Node
+	 * @return - Height difference
+	 */
+	private int getHeight(Node x) {
+
+		if (x.left == null && x.right == null)
+			return 0;
+		// Left branch
+		int lHeight = 0;
+		if (x.left != null) {
+			lHeight = 1;
+			int height = getHeight(x.left);
+			if (height > 1)
+				return height; // Return if height difference becomes > 1
+			else
+				lHeight += height;
+		}
+		// Right branch
+		int rHeight = 0;
+		if (x.right != null) {
+			rHeight = 1;
+			int height = getHeight(x.right);
+			if (height > 1)
+				return height; // Return if height difference becomes > 1
+			else
+				rHeight += height;
+		}
+
+		int diff = lHeight - rHeight;
+		return (diff < 0) ? -diff : diff;
+	}
 }
