@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class testOneStringPalindrome {
+public class TestOneStringPalindrome {
 
 	CheckPalindrome checkString = new CheckPalindrome();
 //	boolean status;
@@ -44,6 +44,8 @@ public class testOneStringPalindrome {
 		assertTrue("The alhanumeric string is a palindrome", checkString.isPalindrome("12Racecar21"));
 		assertTrue("The alhanumeric string is a palindrome", checkString.isPalindrome("12RaCEcaR21"));
 		assertTrue("The alhanumeric string is a palindrome", checkString.isPalindrome("hE-diD,eh"));
+		assertTrue("The alhanumeric string is a palindrome", checkString.isPalindrome("A man, a plan, a canal: Panama"));
+		
 	}
 	
 	

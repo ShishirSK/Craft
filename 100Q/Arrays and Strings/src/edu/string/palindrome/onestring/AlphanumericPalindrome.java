@@ -1,34 +1,20 @@
 package edu.string.palindrome.onestring;
 
 /**
- * Check if an input string is a palindrome. Should not be sensitive to case or
- * other characters
+ * Given a string, determine if it is a palindrome, considering only
+ * alphanumeric characters and ignoring cases. #LeetCode
  * 
  * @author Shishir Kinkar
  * 
  */
-public class CheckPalindrome {
+public class AlphanumericPalindrome {
 
-	public static void main(String[] args) {
-
-		String inputString = null;
-		CheckPalindrome checkString = new CheckPalindrome();
-		boolean isPal = checkString.isPalindrome(inputString);
-
-		if (isPal) {
-			System.out.println("Yay");
-		} else {
-			System.out.println("Nope");
-		}
-	}
-
-	/**
-	 * @param ipString
-	 *            - input string to check
-	 * @return boolean
-	 */
 	public boolean isPalindrome(String ipString) {
-
+		
+		// Edge case - considering empty string as palindrome
+        if (ipString == null) 
+            return true;
+        
 		StringBuilder str = new StringBuilder();
 		char c;
 		// Construct lowercase string with only alphanumeric chars
@@ -51,5 +37,4 @@ public class CheckPalindrome {
 		}
 		return true;
 	}
-
 }
