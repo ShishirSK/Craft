@@ -1,4 +1,4 @@
-package edu.problems.sort;
+package edu.problems.sort.merge;
 
 import java.util.Comparator;
 
