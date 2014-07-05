@@ -67,7 +67,7 @@ public class MergeSort {
 			else if (less(null, copyArray[j], copyArray[i]))
 				toBeSorted[k] = copyArray[j++];
 			else
-				toBeSorted[k] = copyArray[j++];
+				toBeSorted[k] = copyArray[i++];
 		}
 	}
 
