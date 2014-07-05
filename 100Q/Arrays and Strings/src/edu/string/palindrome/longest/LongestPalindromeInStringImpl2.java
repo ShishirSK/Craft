@@ -48,7 +48,7 @@ public class LongestPalindromeInStringImpl2 {
 		// Refactor this block
 		// ------------------------------------------------------
 
-		// Check for cases where length > 4
+		// Check for cases where length > 4. Note the difference. 
 		for (int i = 1; i < carray.length - 1; i++) {
 
 			if (carray[i] == carray[i - 1]) {
