@@ -15,8 +15,8 @@ public class MinPathSum {
 	int numOfCols = 0;
 	int minPath;
 
-	// Recursive solution
-	
+	// Recursive solution - Inefficient.
+
 	public int minPathSum(int[][] grid) {
 
 		numOfRows = grid.length - 1;
